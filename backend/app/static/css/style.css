@@ -37,3 +37,4 @@ body { margin:0; font-family: Arial, sans-serif; background:#0f1115; color:#e7ea
 
 .badge { font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid #2a324a; color:#aeb6cf; }
 .badge--fav { border-color:#5a4a00; color:#ffd56a; }
+body { font-family: Arial, sans-serif; }
