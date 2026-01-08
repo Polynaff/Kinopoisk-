@@ -14,9 +14,8 @@ Backend отвечает за:
 - Flask
 - SQLite (локально)
 - Jinja2 (шаблоны используются фронтендом)
-
 ## Структура backend
-
+```text
 backend/
 ├── app/
 │   ├── __init__.py      # инициализация Flask-приложения
@@ -27,7 +26,7 @@ backend/
 ├── run.py               # точка входа в приложение
 ├── seed.py              # заполнение базы тестовыми данными
 └── requirements.txt     # зависимости проекта
-
+```
 ## Запуск проекта
 Установить зависимости:
 pip install -r backend/requirements.txt
