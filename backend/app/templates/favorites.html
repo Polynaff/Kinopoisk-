@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Избранное{% endblock %}
+
+{% block content %}
+  <h2>⭐ Избранное</h2>
+
+  {% if movies %}
+    <div class="grid">
+      {% for movie in movies %}
+        <div class="card">
+
+          {% if movie.poster %}
+            <a href="{{ url_for('main.movie_detail', movie_id=movie.id) }}">
+              <img
+                src="{{ url_for('static', filename='img/' ~ movie.poster) }}"
+                alt="{{ movie.title }}"
+                style="width:100%; max-width:200px; border-radius:12px; margin:10px 0;"
+              >
+            </a>
+          {% endif %}
+
+          <div class="card__top">
+            <div>
+              <h3 class="card__title">
+                <a href="{{ url_for('main.movie_detail', movie_id=movie.id) }}"
+                   style="color:inherit; text-decoration:none;">
+                  {{ movie.title }}
+                </a>
+              </h3>
+              <div class="card__meta">
+                {{ movie.year or "—" }} • {{ movie.genre or "—" }}
+              </div>
+            </div>
+
+            <span class="badge badge--fav">★</span>
+          </div>
+
+          {% if movie.description %}
+            <p class="card__desc">{{ movie.description }}</p>
+          {% endif %}
+
+          <div class="card__actions">
+            <form method="post" action="{{ url_for('main.toggle_favorite', movie_id=movie.id) }}">
+              <button class="btn btn--danger" type="submit">
+                Убрать из избранного
+              </button>
+            </form>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>В избранном пока ничего нет.</p>
+  {% endif %}
+{% endblock %}
