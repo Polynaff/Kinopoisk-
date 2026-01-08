@@ -16,23 +16,21 @@ Backend отвечает за:
 - Jinja2 (шаблоны используются фронтендом)
 
 ## Структура backend
+
 backend/
 ├── app/
-│ ├── init.py # инициализация Flask-приложения
-│ ├── models.py # модели данных
-│ ├── routes.py # маршруты и обработчики
-│ ├── templates/ # HTML-шаблоны
-│ └── static/ # статические файлы
-├── run.py # точка входа в приложение
-├── seed.py # заполнение базы тестовыми данными
-└── requirements.txt # зависимости проекта
+│   ├── __init__.py      # инициализация Flask-приложения
+│   ├── models.py        # модели данных
+│   ├── routes.py        # маршруты и обработчики
+│   ├── templates/       # HTML-шаблоны (используются frontend)
+│   └── static/          # статические файлы (CSS, JS)
+├── run.py               # точка входа в приложение
+├── seed.py              # заполнение базы тестовыми данными
+└── requirements.txt     # зависимости проекта
 
 ## Запуск проекта
-1. Установить зависимости:
-   pip install -r backend/requirements.txt
-   
-(Опционально) Заполнить базу тестовыми данными:
+Установить зависимости:
+pip install -r backend/requirements.txt
 python backend/seed.py
-
 Запустить сервер:
 python backend/run.py
