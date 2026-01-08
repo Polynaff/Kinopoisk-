@@ -3,8 +3,9 @@
 Учебный проект: веб-приложение «Каталог фильмов».
 
 ## Состав проекта
-- [Backend](backend/) — Flask-приложение, модели данных, маршруты, seed-скрипт
-- Frontend — HTML-шаблоны и статика в `backend/app/templates` и `backend/app/static`
+
+- [Backend](backend/) — Flask-приложение, модели данных, маршруты, seed-скрипт  
+- [Frontend](backend/README.frontend.md) — HTML-шаблоны и статические ресурсы пользовательского интерфейса
 
 ## Быстрый запуск
 ```bash
