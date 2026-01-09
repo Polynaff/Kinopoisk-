@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block content %}
+  <!-- Возврат к списку -->
+  <p><a href="{{ url_for('main.index') }}">← Назад к каталогу</a></p>
+
+  <!-- Основной контейнер страницы фильма -->
+  <div style="display:flex; gap:40px; align-items:flex-start;">
+
+    <!-- Левая колонка: постер -->
+    <div style="flex:0 0 320px;">
+      {% if movie.poster %}
+        <img
+          src="{{ url_for('static', filename='img/' ~ movie.poster) }}"
+          alt="Постер фильма {{ movie.title }}"
+          style="width:100%; border-radius:16px;"
+        >
+      {% endif %}
+    </div>
+
+    <!-- Правая колонка: информация -->
+    <div style="flex:1;">
+
+      <!-- Название фильма -->
+      <h2>{{ movie.title }}</h2>
+
+      <!-- Год и жанр -->
+      <div class="card__meta" style="margin-bottom:12px;">
+        {{ movie.year or "—" }} • {{ movie.genre or "—" }}
+      </div>
+
+      <!-- Полное описание -->
+      <p style="font-size:16px; line-height:1.6;">
+        {{ movie.description or "Описание пока не добавлено." }}
+      </p>
+
+      <!-- Ссылка для просмотра -->
+      {% if movie.watch_url %}
+        <p style="margin-top:20px;">
+          <a href="{{ movie.watch_url }}"
+             target="_blank"
+             rel="noopener"
+             class="btn">
+            🎬 Смотреть фильм
+          </a>
+        </p>
+      {% endif %}
+
+      <!-- Управление избранным -->
+      <div style="margin-top:20px;">
+        <form method="post" action="{{ url_for('main.toggle_favorite', movie_id=movie.id) }}">
+          <button class="btn" type="submit">
+            {% if movie.is_favorite %}
+              Убрать из избранного
+            {% else %}
+              В избранное
+            {% endif %}
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+{% endblock %}
+

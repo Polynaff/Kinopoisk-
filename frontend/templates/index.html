@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Каталог фильмов{% endblock %}
+
+{% block content %}
+  <!-- Заголовок страницы -->
+  <h2>Все фильмы</h2>
+
+  {% if movies %}
+    <!-- Сетка карточек фильмов -->
+    <div class="grid">
+
+      {% for movie in movies %}
+        <!-- Карточка одного фильма -->
+        <div class="card">
+
+          <!-- Постер фильма (если есть) -->
+          {% if movie.poster %}
+            <a href="{{ url_for('main.movie_detail', movie_id=movie.id) }}">
+              <img
+                src="{{ url_for('static', filename='img/' ~ movie.poster) }}"
+                alt="Постер фильма {{ movie.title }}"
+                style="width:100%; max-width:200px; border-radius:12px; margin:10px 0;"
+              >
+            </a>
+          {% endif %}
+
+          <!-- Верхняя часть карточки: название, год, жанр, избранное -->
+          <div class="card__top">
+            <div>
+              <h3 class="card__title">
+                <a href="{{ url_for('main.movie_detail', movie_id=movie.id) }}"
+                   style="color:inherit; text-decoration:none;">
+                  {{ movie.title }}
+                </a>
+              </h3>
+
+              <!-- Мета-информация -->
+              <div class="card__meta">
+                {{ movie.year or "—" }} • {{ movie.genre or "—" }}
+              </div>
+            </div>
+
+            <!-- Индикатор избранного -->
+            {% if movie.is_favorite %}
+              <span class="badge badge--fav" title="В избранном">★</span>
+            {% else %}
+              <span class="badge" title="Не в избранном">☆</span>
+            {% endif %}
+          </div>
+
+          <!-- Краткое описание -->
+          {% if movie.description %}
+            <p class="card__desc">{{ movie.description }}</p>
+          {% endif %}
+
+          <!-- Действия с фильмом -->
+          <div class="card__actions">
+            <form method="post" action="{{ url_for('main.toggle_favorite', movie_id=movie.id) }}">
+              <button class="btn" type="submit">
+                {% if movie.is_favorite %}
+                  Убрать из избранного
+                {% else %}
+                  В избранное
+                {% endif %}
+              </button>
+            </form>
+          </div>
+
+        </div>
+      {% endfor %}
+
+    </div>
+  {% else %}
+    <!-- Сообщение при отсутствии результатов -->
+    <p>Ничего не найдено.</p>
+  {% endif %}
+{% endblock %}
