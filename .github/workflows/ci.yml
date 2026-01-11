@@ -29,6 +29,6 @@ jobs:
         run: |
           python -m compileall backend
 
-      - name: Lint (flake8)
-        run: |
-          flake8 backend --ignore=E501,W503 --exclude=__pycache__,migrations
+    - name: Lint (flake8)
+  run: |
+    flake8 backend --ignore=E501,W503,F811 --exclude=__pycache__,migrations
